@@ -1,0 +1,35 @@
+{
+  "name": "helixa-sdk",
+  "version": "0.1.0",
+  "description": "JavaScript/TypeScript SDK for the Helixa API",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/esm/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["helixa", "cred", "ai-agents", "web3"],
+  "author": "Bendr",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bendr-20/helixa-sdk.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}
