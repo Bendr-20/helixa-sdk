@@ -15,9 +15,9 @@ const { Helixa } = require('helixa-sdk');
 
 const helixa = new Helixa(); // no key needed for reads
 
-// Check cred score
-const cred = await helixa.checkCred('0x1234...');
-console.log(cred.score, cred.tier); // 67 'Prime'
+// Check Cred by numeric Helixa token ID
+const cred = await helixa.checkCred(1);
+console.log(cred.credScore, cred.tierLabel);
 
 // Get agent by ID
 const agent = await helixa.getAgent(1);
@@ -34,7 +34,7 @@ const stats = await helixa.getStats();
 ```js
 const helixa = new Helixa({ apiKey: 'hxk_...' });
 
-await helixa.reportOutcome('0x1234...', {
+await helixa.reportOutcome('0x1234567890abcdef1234567890abcdef12345678', {
   outcome: 'COMPLETED',
   sessionId: 'sess_123',
   timestamp: new Date().toISOString(),
@@ -47,7 +47,7 @@ await helixa.reportOutcome('0x1234...', {
 const { Helixa, HelixaError } = require('helixa-sdk');
 
 try {
-  await helixa.checkCred('0xinvalid');
+  await helixa.checkCred(-1);
 } catch (err) {
   if (err instanceof HelixaError) {
     console.error(err.status, err.code, err.message);
@@ -64,11 +64,11 @@ try {
 ### Methods
 | Method | Auth | Description |
 |--------|------|-------------|
-| `checkCred(address)` | No | Get cred score for an address |
-| `getAgent(id)` | No | Get agent by ID |
-| `searchAgents(query, page?, pageSize?)` | No | Search agents |
+| `checkCred(tokenId)` | No | Get Cred for a numeric Helixa token ID |
+| `getAgent(tokenId)` | No | Get profile by numeric token ID |
+| `searchAgents(search, page?, limit?)` | No | Resolve names/wallets and search agents |
 | `getStats()` | No | Platform statistics |
-| `reportOutcome(address, payload)` | Yes | Report an outcome |
+| `reportOutcome(address, payload)` | `X-API-Key` | Report a canonical outcome for an agent wallet |
 
 ## License
 

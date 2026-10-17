@@ -3,10 +3,12 @@ export { HelixaError } from './error.js';
 export type {
   HelixaConfig,
   CredResult,
-  CredBreakdown,
+  EvidenceCoverage,
+  Trait,
   Agent,
   AgentSearchResult,
   Stats,
+  SessionOutcome,
   OutcomePayload,
   OutcomeResult,
 } from './types.js';
